@@ -6,6 +6,7 @@ int main() {
 
     // Variables
     string userInput = "";
+    string expandedInput = "";
 
     // Input prompt;
     cout << "Enter text: ";
@@ -19,22 +20,24 @@ int main() {
 
     // Search string with find() and print meanings
     if (userInput.find("BFF") != string::npos){
-        cout << "BFF: best friend forever" << endl;
+        expandedInput = userInput.replace(userInput.find("BFF"), 3, "best friend forever");
     }
     if (userInput.find("IDK") != string::npos){
-        cout << "IDK: I don't know" << endl;
+        expandedInput = userInput.replace(userInput.find("IDK"), 3, "I don't know");
     }
     if (userInput.find("JK") != string::npos){
-        cout << "JK: just kidding" << endl;
+        expandedInput = userInput.replace(userInput.find("JK"), 2, "just kidding");
     }
     if (userInput.find("TMI") != string::npos){
-        cout << "TMI: too much information" << endl;
+        expandedInput = userInput.replace(userInput.find("TMI"), 3, "too much information");
     }
     if (userInput.find("TTYL") != string::npos){
-        cout << "TTYL: talk to you later" << endl;
+        expandedInput = userInput.replace(userInput.find("TTYL"), 4, "talk to you later");
     }
-    return 0;
 
-    // Expanded output
+
+    // Output expanded version
+    cout << "Expanded: " << expandedInput << endl;
+    return 0;
 
 }
