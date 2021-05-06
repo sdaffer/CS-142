@@ -4,12 +4,13 @@ using namespace std;
 
 
 // Function Prototypes
-char userPromptAndInput();
-void outputPlayersAbove(const vector<int>& playerNumber, const vector<int>& playerRating);
-void outputRoster(const vector<int>& playerNumber, const vector<int>& playerRating);
-void deletePlayer(vector<int>& playerNumber, vector<int>& playerRating);
-void updateRating(vector<int>& playerNumber, vector<int>& playerRating);
-void addPlayer(vector<int>& playerNumber, vector<int>& playerRating);
+char UserPromptAndInput();
+void OutputPlayersAbove(const vector<int>& playerNumber, const vector<int>& playerRating);
+void OutputRoster(const vector<int>& playerNumber, const vector<int>& playerRating);
+void DeletePlayer(vector<int>& playerNumber, vector<int>& playerRating);
+void UpdateRating(vector<int>& playerNumber, vector<int>& playerRating);
+void AddPlayer(vector<int>& playerNumber, vector<int>& playerRating);
+
 
 // Main function
 int main() {
@@ -18,7 +19,10 @@ int main() {
     const int NUM_PAIRS = 5;
     vector<int> playerNumber(NUM_PAIRS);
     vector<int> playerRating(NUM_PAIRS);
+    char userInputChar = 'a';
+    bool cycleBool = true;
 
+    // Input information into the two vectors
     for (int i = 0; i < NUM_PAIRS; ++i) {
         cout << "Enter player " << i + 1 << "'s jersey number: ";
         cin >> playerNumber.at(i);
@@ -37,7 +41,35 @@ int main() {
 
     cout << endl;
 
+    userInputChar = UserPromptAndInput();
 
+    // Continuously cycle through options until 'q' is entered
+
+    while (cycleBool) {
+        if (userInputChar == 'a') {
+            AddPlayer(playerNumber, playerRating);
+        }
+        else if (userInputChar == 'd') {
+            DeletePlayer(playerNumber, playerRating);
+        }
+        else if (userInputChar == 'u') {
+            UpdateRating(playerNumber, playerRating);
+        }
+        else if (userInputChar == 'r') {
+            OutputPlayersAbove(playerNumber, playerRating);
+        }
+        else if (userInputChar == 'o') {
+            OutputRoster(playerNumber, playerRating);
+        }
+        else if (userInputChar == 'q') {
+            cycleBool = false;
+            exit(0);
+        }
+        else {
+            cout << "Invalid input, please try again." << endl;
+        }
+        userInputChar = UserPromptAndInput();
+    }
 
     return 0;
 }
@@ -45,7 +77,7 @@ int main() {
 
 // Functions
 
-void addPlayer(vector<int>& playerNumber, vector<int>& playerRating) {
+void AddPlayer(vector<int>& playerNumber, vector<int>& playerRating) {
     int userInputNumber = 0;
     int userInputRating = 0;
 
@@ -58,7 +90,7 @@ void addPlayer(vector<int>& playerNumber, vector<int>& playerRating) {
     playerRating.push_back(userInputRating);
 }
 
-void updateRating(vector<int>& playerNumber, vector<int>& playerRating) {
+void UpdateRating(vector<int>& playerNumber, vector<int>& playerRating) {
     int userJerseyInput = 0;
     int userRatingInput = 0;
 
@@ -74,7 +106,7 @@ void updateRating(vector<int>& playerNumber, vector<int>& playerRating) {
     }
 }
 
-void deletePlayer(vector<int>& playerNumber, vector<int>& playerRating) {
+void DeletePlayer(vector<int>& playerNumber, vector<int>& playerRating) {
     int userJerseyInput = 0;
 
     cout << "Enter a jersey number: ";
@@ -88,7 +120,7 @@ void deletePlayer(vector<int>& playerNumber, vector<int>& playerRating) {
     }
 }
 
-void outputRoster(const vector<int>& playerNumber, const vector<int>& playerRating) {
+void OutputRoster(const vector<int>& playerNumber, const vector<int>& playerRating) {
     cout << "ROSTER" << endl;
 
     for (int i = 0; i < playerNumber.size(); ++i) {
@@ -97,7 +129,7 @@ void outputRoster(const vector<int>& playerNumber, const vector<int>& playerRati
     }
 }
 
-void outputPlayersAbove(const vector<int>& playerNumber, const vector<int>& playerRating) {
+void OutputPlayersAbove(const vector<int>& playerNumber, const vector<int>& playerRating) {
     int userInput = 0;
 
     cout << "Enter a rating: ";
@@ -112,7 +144,7 @@ void outputPlayersAbove(const vector<int>& playerNumber, const vector<int>& play
     }
 }
 
-char userPromptAndInput(){
+char UserPromptAndInput(){
     char inputChar = 'a';
 
     cout << "MENU" << endl;
