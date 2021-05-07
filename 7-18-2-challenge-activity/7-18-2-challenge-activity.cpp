@@ -56,7 +56,8 @@ void Album::PrintSongsShorterThan(int songDuration) const {
     for (i = 0; i < albumSongs.size(); ++i) {
         //while (albumSongs.currSong.GetDuration() < songDuration) {
         //while (currSong.GetDuration() < songDuration) {
-        while (albumSongs.GetDuration() < songDuration) {
+        if (albumSongs.at(i).GetDuration() < songDuration) {
+            currSong = albumSongs.at(i);
             currSong.PrintSong();
         }
     }
