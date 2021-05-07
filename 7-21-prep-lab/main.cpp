@@ -6,6 +6,7 @@ int main() {
     ItemToPurchase firstItem;
     ItemToPurchase secondItem;
     string currItemName = "";
+    string secondItemName = "";
     double currItemPrice = 0.0;
     double priceTotal = 0.0;
     int currItemQuantity = 0;
@@ -14,7 +15,8 @@ int main() {
     // Item1
     cout << "Item 1" << endl;
     cout << "Enter the item name: ";
-    getline(cin, currItemName);
+    //getline(cin, currItemName);
+    cin >> currItemName;
     cout << endl;
     cout << "Enter the item price: ";
     cin >> currItemPrice;
@@ -27,14 +29,11 @@ int main() {
     firstItem.SetPrice(currItemPrice);
     firstItem.SetQuantity(currItemQuantity);
 
-    currItemName = "";
-    currItemPrice = 0.0;
-    currItemQuantity = 0;
-
     // Item2
     cout << "Item 2" << endl;
     cout << "Enter the item name: ";
-    getline(cin, currItemName);
+    //getline(cin, secondItemName);
+    cin >> secondItemName;
     cout << endl;
     cout << "Enter the item price: ";
     cin >> currItemPrice;
@@ -44,7 +43,7 @@ int main() {
     cout << endl;
     cout << endl;
 
-    secondItem.SetName(currItemName);
+    secondItem.SetName(secondItemName);
     secondItem.SetPrice(currItemPrice);
     secondItem.SetQuantity(currItemQuantity);
 
@@ -53,13 +52,13 @@ int main() {
     cout << "TOTAL COST" << endl;
     cout << firstItem.GetName() << " " << firstItem.GetQuantity() << " @ $";
     cout << firstItem.GetPrice() << " = $";
-    priceTotal = priceTotal + firstItem.GetPrice() * firstItem.GetQuantity();
+    priceTotal = priceTotal + (firstItem.GetPrice() * firstItem.GetQuantity());
     cout << priceTotal << endl;
 
     // Item2
     cout << secondItem.GetName() << " " << secondItem.GetQuantity() << " @ $";
     cout << secondItem.GetPrice() << " = $";
-    priceTotal = priceTotal + secondItem.GetPrice() * secondItem.GetQuantity();
+    priceTotal = priceTotal + (secondItem.GetPrice() * secondItem.GetQuantity());
     cout << priceTotal << endl;
 
     cout << endl;
