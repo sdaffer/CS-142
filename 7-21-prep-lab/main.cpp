@@ -15,23 +15,33 @@ int main() {
     cout << "Item 1" << endl;
     cout << "Enter the item name: ";
     getline(cin, currItemName);
+    cout << endl;
     cout << "Enter the item price: ";
     cin >> currItemPrice;
+    cout << endl;
     cout << "Enter the item quantity: ";
     cin >> currItemQuantity;
+    cout << endl << endl;
 
     firstItem.SetName(currItemName);
     firstItem.SetPrice(currItemPrice);
     firstItem.SetQuantity(currItemQuantity);
 
+    currItemName = "";
+    currItemPrice = 0.0;
+    currItemQuantity = 0;
+
     // Item2
     cout << "Item 2" << endl;
     cout << "Enter the item name: ";
     getline(cin, currItemName);
+    cout << endl;
     cout << "Enter the item price: ";
     cin >> currItemPrice;
+    cout << endl;
     cout << "Enter the item quantity: ";
     cin >> currItemQuantity;
+    cout << endl;
     cout << endl;
 
     secondItem.SetName(currItemName);
