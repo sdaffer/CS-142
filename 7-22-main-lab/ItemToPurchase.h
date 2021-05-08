@@ -3,6 +3,7 @@
 #include <iostream>
 using namespace std;
 
+/*Item to purchase class*/
 class ItemToPurchase {
 public:
     void SetName(string nameParam);

@@ -3,6 +3,7 @@
 using namespace std;
 
 #include "ShoppingCart.h"
+/*Shopping cart class*/
 
 // Constructors
 // Constructor with no parameters

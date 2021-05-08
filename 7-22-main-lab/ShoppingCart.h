@@ -5,6 +5,7 @@
 #include "ItemToPurchase.h"
 using namespace std;
 
+/*Shopping cart class*/
 class ShoppingCart {
 public:
     // Constructors

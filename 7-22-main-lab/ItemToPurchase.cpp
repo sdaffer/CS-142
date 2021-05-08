@@ -3,6 +3,8 @@
 using namespace std;
 
 #include "ItemToPurchase.h"
+/*Item to purchase class*/
+
 
 
 // Default constructor FIXME: Moved constructor to beginning of class. Does this work? Make sure to test.
