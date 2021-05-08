@@ -4,6 +4,16 @@ using namespace std;
 
 #include "ItemToPurchase.h"
 
+
+// Default constructor FIXME: Moved constructor to beginning of class. Does this work? Make sure to test.
+ItemToPurchase::ItemToPurchase() {
+    itemName = "none";
+    itemDescription = "none";
+    itemPrice = 0.0;
+    itemQuantity = 0;
+}
+
+
 // Setters
 void ItemToPurchase::SetName(string nameParam) {
     itemName = nameParam;
@@ -41,13 +51,4 @@ void ItemToPurchase::PrintCostItem(ItemToPurchase itemObject) const { //FIXME: I
 }
 void ItemToPurchase::PrintDescriptionItem(ItemToPurchase itemObject) const { //FIXME: Is const needed here? I don't think I'm modifying the object
     cout << itemObject.GetName() << ": " << itemObject.GetDescription() << ".";
-}
-
-
-// Default constructor
-ItemToPurchase::ItemToPurchase() {
-    itemName = "none";
-    itemDescription = "none";
-    itemPrice = 0.0;
-    itemQuantity = 0;
 }
