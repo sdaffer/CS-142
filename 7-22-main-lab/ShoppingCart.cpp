@@ -6,30 +6,42 @@ using namespace std;
 
 // Constructors
 // Constructor with no parameters
-ShoppingCart::ShoppingCart() { //FIXME: Does this work? Not tested yet.
+ShoppingCart::ShoppingCart() {
     customerName = "none";
     dateCreated = "January 1, 2016";
 }
 // Constructor with parameters
-ShoppingCart::ShoppingCart(string paramCustomerName, string paramDateCreated) { //FIXME: Does this work? Not tested yet.
+ShoppingCart::ShoppingCart(string paramCustomerName, string paramDateCreated) {
     customerName = paramCustomerName;
     dateCreated = paramDateCreated;
 }
 
 
 // Setters
-void ShoppingCart::AddItem(ItemToPurchase paramItem) { //FIXME: Does this work? Not tested yet.
+void ShoppingCart::AddItem(ItemToPurchase paramItem) {
+    // Escape helper is my way of making sure that the item is added only once when the appropriate conditions are met
+    int escapeHelper = 0;
+
     // Loop through itemList vector. If the item is already found, output that it is already found. Otherwise, add it
-    for (int i = 0; i < itemList.size(); ++i) {
-        if (itemList.at(i).GetName() == paramItem.GetName()){
-            cout << "Item is already found in the cart. It will not be added." << endl;
-        }
-        else {
-            itemList.push_back(paramItem);
+    if (itemList.size() == 0) {
+        itemList.push_back(paramItem);
+        escapeHelper = escapeHelper + 1;
+    }
+    else {
+        for (int i = 0; i < itemList.size(); ++i) {
+            if (itemList.at(i).GetName() == paramItem.GetName()) {
+                cout << "Item is already found in the cart. It will not be added." << endl;
+            }
+            else {
+                escapeHelper = escapeHelper + 1;
+            }
         }
     }
+    if (escapeHelper == 0) {
+        itemList.push_back(paramItem);
+    }
 }
-void ShoppingCart::RemoveItem(string paramItemName) { //FIXME: Does this work? Not tested yet.
+void ShoppingCart::RemoveItem(string paramItemName) {
     // Loop through itemList vector. If the item not found, output that it won't be removed. Otherwise, remove it. Similar to add item function
     for (int i = 0; i < itemList.size(); ++i) {
         if (itemList.at(i).GetName() == paramItemName) {
@@ -41,7 +53,7 @@ void ShoppingCart::RemoveItem(string paramItemName) { //FIXME: Does this work? N
         }
     }
 }
-void ShoppingCart::UpdateQuantity(string paramItemName) { //FIXME: Does this work? Not tested yet.
+void ShoppingCart::UpdateQuantity(string paramItemName) {
     // Variable for user input
     int userQuantity = 0;
 
@@ -61,10 +73,10 @@ void ShoppingCart::UpdateQuantity(string paramItemName) { //FIXME: Does this wor
 
 
 // Getters
-string ShoppingCart::GetCustomerName() const {return customerName;} //FIXME: Does this work? Not tested yet.
-string ShoppingCart::GetDateCreated() const {return dateCreated;} //FIXME: Does this work? Not tested yet.
-int ShoppingCart::GetQuantityCart() const {return itemList.size();} //FIXME: Is this the correct return? //FIXME: Does this work? Not tested yet.
-double ShoppingCart::GetTotalCost() const { //FIXME: Does this work? Not tested yet.
+string ShoppingCart::GetCustomerName() const {return customerName;}
+string ShoppingCart::GetDateCreated() const {return dateCreated;}
+int ShoppingCart::GetQuantityCart() const {return itemList.size();} //FIXME: Is this the correct return?
+double ShoppingCart::GetTotalCost() const {
     double totalCost = 0.0;
 
     // Loop through the itemList vector and add up all the prices using the get price function
@@ -77,7 +89,7 @@ double ShoppingCart::GetTotalCost() const { //FIXME: Does this work? Not tested 
 
 
 // Printers
-void ShoppingCart::PrintEachDescription() const { //FIXME: Does this work? Not tested yet.
+void ShoppingCart::PrintEachDescription() const {
     // If shopping cart is empty, output so. Otherwise, loop through and print each description
 
     if (itemList.size() == 0) {
@@ -92,7 +104,7 @@ void ShoppingCart::PrintEachDescription() const { //FIXME: Does this work? Not t
         }
     }
 }
-void ShoppingCart::PrintNumberAndCost() const { //FIXME: Does this work? Not tested yet.
+void ShoppingCart::PrintNumberAndCost() const {
     double totalCost = 0.0;
 
     // If shopping cart is empty, output so. Otherwise, output number of items, subtotals and total
@@ -108,5 +120,5 @@ void ShoppingCart::PrintNumberAndCost() const { //FIXME: Does this work? Not tes
     }
     // Output total cost - set precision for standard dollar form
     cout << fixed << setprecision(2);
-    cout << "Total: $" << totalCost;
+    cout << "Total: $" << totalCost << endl;
 }
