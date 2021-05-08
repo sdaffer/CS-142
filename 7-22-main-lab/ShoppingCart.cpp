@@ -18,7 +18,7 @@ ShoppingCart::ShoppingCart(string paramCustomerName, string paramDateCreated) {
 
 
 // Setters
-void ShoppingCart::AddItem(ItemToPurchase paramItem) {
+void ShoppingCart::AddItem(ItemToPurchase paramItem) { //FIXME: This function is not working. Needs to be checked out.
     // Escape helper is my way of making sure that the item is added only once when the appropriate conditions are met
     int escapeHelper = 0;
 
@@ -53,17 +53,12 @@ void ShoppingCart::RemoveItem(string paramItemName) {
         }
     }
 }
-void ShoppingCart::UpdateQuantity(string paramItemName) {
-    // Variable for user input
-    int userQuantity = 0;
-
+void ShoppingCart::UpdateQuantity(string paramItemName, int paramQuantity) {
     // Loop through itemList vector. If item not found, output that it won't be modified. Otherwise, modify it. Similar to add and remove functions
     for (int i = 0; i < itemList.size(); ++i) {
         if (itemList.at(i).GetName() == paramItemName) {
             // If found, update quantity at current index
-            cout << "Enter the new quantity: ";
-            cin >> userQuantity;
-            itemList.at(i).SetQuantity(userQuantity);
+            itemList.at(i).SetQuantity(paramQuantity);
         }
         else {
             cout << "Item not found in cart. It will not be modified." << endl;
@@ -92,7 +87,7 @@ double ShoppingCart::GetTotalCost() const {
 void ShoppingCart::PrintEachDescription() const {
     // If shopping cart is empty, output so. Otherwise, loop through and print each description
 
-    if (itemList.size() == 0) {
+    if (itemList.empty() == 0) {
         cout << "Shopping cart is empty." << endl;
     }
     else {
@@ -108,7 +103,7 @@ void ShoppingCart::PrintNumberAndCost() const {
     double totalCost = 0.0;
 
     // If shopping cart is empty, output so. Otherwise, output number of items, subtotals and total
-    if (itemList.size() == 0) {
+    if (itemList.empty() == 0) {
         cout << "Shopping cart is empty." << endl;
     }
     else {

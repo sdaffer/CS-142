@@ -14,7 +14,7 @@ public:
     // Setters
     void AddItem(ItemToPurchase paramItem);
     void RemoveItem(string paramItemName);
-    void UpdateQuantity(string paramItemName);
+    void UpdateQuantity(string paramItemName, int paramQuantity);
 
     // Getters
     string GetCustomerName() const;

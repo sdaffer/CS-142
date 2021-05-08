@@ -5,6 +5,8 @@ using namespace std;
 
 class ItemToPurchase {
 public:
+    ItemToPurchase(); // Default constructor
+    ItemToPurchase(string paramItemName, string paramItemDescription, double paramItemPrice, int paramItemQuantity); // Parameter constructor
     void SetName(string nameParam);
     string GetName() const;
     void SetPrice(double priceParam);
@@ -19,7 +21,7 @@ public:
     // Printer functions without the need of a parameter
     void PrintCostItem() const;
     void PrintDescriptionItem() const;
-    ItemToPurchase(); // Prototype default constructor
+
 private:
     string itemName;
     string itemDescription;

@@ -4,13 +4,20 @@ using namespace std;
 
 #include "ItemToPurchase.h"
 
-
-// Default constructor FIXME: Moved constructor to beginning of class. Does this work? Make sure to test.
+// Constructors
+// Default constructor
 ItemToPurchase::ItemToPurchase() {
     itemName = "none";
     itemDescription = "none";
     itemPrice = 0.0;
     itemQuantity = 0;
+}
+// Constructor with parameters
+ItemToPurchase::ItemToPurchase(string paramItemName, string paramItemDescription, double paramItemPrice, int paramItemQuantity) {
+    itemName = paramItemName;
+    itemDescription = paramItemDescription;
+    itemPrice = paramItemPrice;
+    itemQuantity = paramItemQuantity;
 }
 
 
