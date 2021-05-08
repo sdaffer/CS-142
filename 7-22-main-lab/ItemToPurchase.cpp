@@ -36,6 +36,7 @@ int ItemToPurchase::GetQuantity() const {return itemQuantity;}
 
 
 // Printers
+/* Below are the printer functions that need a parameter. I will try to do it without a parameter with the ones below these
 void ItemToPurchase::PrintCostItem(ItemToPurchase itemObject) const { //FIXME: Is const needed here? I don't think I'm modifying the object
     double itemSubTotal = 0.0;
 
@@ -51,4 +52,21 @@ void ItemToPurchase::PrintCostItem(ItemToPurchase itemObject) const { //FIXME: I
 }
 void ItemToPurchase::PrintDescriptionItem(ItemToPurchase itemObject) const { //FIXME: Is const needed here? I don't think I'm modifying the object
     cout << itemObject.GetName() << ": " << itemObject.GetDescription() << ".";
+}
+*/
+void ItemToPurchase::PrintCostItem() const { //FIXME: Is const needed here? I don't think I'm modifying the object
+    double itemSubTotal = 0.0;
+
+    // Set precision to display two decimal points in standard dollar form
+
+    cout << fixed << setprecision(2);
+
+    // Output cost in format according to instructions
+    cout << itemName << " " << itemQuantity << " @ $";
+    cout << itemPrice << " = $";
+    itemSubTotal = itemPrice * itemQuantity;
+    cout << itemSubTotal << endl;
+}
+void ItemToPurchase::PrintDescriptionItem() const { //FIXME: Is const needed here? I don't think I'm modifying the object
+    cout << itemName << ": " << itemDescription << ".";
 }
