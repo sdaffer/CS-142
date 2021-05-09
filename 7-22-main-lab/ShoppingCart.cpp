@@ -9,6 +9,7 @@ using namespace std;
 ShoppingCart::ShoppingCart() {
     customerName = "none";
     dateCreated = "January 1, 2016";
+    itemList.resize(0); //FIXME: I added this because I wasn't sure if I needed the vector to begin with a defined size 0
 }
 // Constructor with parameters
 ShoppingCart::ShoppingCart(string paramCustomerName, string paramDateCreated) {

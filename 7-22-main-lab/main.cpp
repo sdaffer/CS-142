@@ -92,6 +92,7 @@ int GetUserInt(const std::string& prompt) {
 
 
 void AddMenuOption(ShoppingCart paramUserCart) { //FIXME: This function is not working. Needs to be checked out.
+    //FIXME: The test bed worked for the member class function, so there's something wrong in this function
     std::string itemName = GetUserString("Enter the item name: ");
     std::string itemDescription = GetUserString("Enter the item description: ");
     double itemPrice = GetUserDouble("Enter the item price: ");
@@ -112,12 +113,13 @@ void RemoveMenuOption(ShoppingCart paramUserCart) {
     paramUserCart.RemoveItem(nameOfItemToRemove);
 }
 
-void ChangeMenuOption(ShoppingCart paramUserCart) {
+void ChangeMenuOption(ShoppingCart paramUserCart) { //FIXME: This doesn't seem to be working either
     std::string nameOfItemToChange = GetUserString("Enter the item name: ");
     int newItemQuantity = GetUserInt("Enter the new quantity: ");
 
     // TODO: You might also print error messages here, depending on how you implement the ShoppingCart class
     paramUserCart.UpdateQuantity(nameOfItemToChange, newItemQuantity);
+    paramUserCart.UpdateQuantity("test change", 1000);
 }
 
 void DescriptionsMenuOption(ShoppingCart paramUserCart) {
