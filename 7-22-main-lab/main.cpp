@@ -9,7 +9,7 @@ using namespace std;
 
 std::string GetUserString(const std::string& prompt);
 
-void AddMenuOption(ShoppingCart paramUserCart);
+void AddMenuOption(ShoppingCart& paramUserCart); //FIXME: Passby reference?
 void RemoveMenuOption(ShoppingCart paramUserCart);
 void ChangeMenuOption(ShoppingCart paramUserCart);
 void DescriptionsMenuOption(ShoppingCart paramUserCart);
@@ -91,7 +91,7 @@ int GetUserInt(const std::string& prompt) {
 }
 
 
-void AddMenuOption(ShoppingCart paramUserCart) { //FIXME: This function is not working. Needs to be checked out.
+void AddMenuOption(ShoppingCart& paramUserCart) { //FIXME: This function is not working. Needs to be checked out.
     //FIXME: The test bed worked for the member class function, so there's something wrong in this function
     std::string itemName = GetUserString("Enter the item name: ");
     std::string itemDescription = GetUserString("Enter the item description: ");
