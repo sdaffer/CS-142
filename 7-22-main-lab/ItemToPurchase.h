@@ -5,8 +5,11 @@ using namespace std;
 
 class ItemToPurchase {
 public:
+    // Constructors
     ItemToPurchase(); // Default constructor
     ItemToPurchase(string paramItemName, string paramItemDescription, double paramItemPrice, int paramItemQuantity); // Parameter constructor
+
+    // Setters / Getters
     void SetName(string nameParam);
     string GetName() const;
     void SetPrice(double priceParam);
@@ -15,10 +18,8 @@ public:
     int GetQuantity() const;
     void SetDescription(string descriptionParam);
     string GetDescription() const;
-    // Below are the printer functions that need a parameter. I will try to do it without a parameter with the ones below these
-    //void PrintCostItem(ItemToPurchase itemObject) const;
-    //void PrintDescriptionItem(ItemToPurchase itemObject) const;
-    // Printer functions without the need of a parameter
+
+    // Printer functions
     void PrintCostItem() const;
     void PrintDescriptionItem() const;
 
