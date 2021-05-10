@@ -36,7 +36,9 @@ void ItemToPurchase::SetDescription(string descriptionParam) {
 }
 
 // Getters
-string ItemToPurchase::GetName() const {return itemName;}
+string ItemToPurchase::GetName() const {
+    return itemName;
+}
 string ItemToPurchase::GetDescription() const {return itemDescription;}
 double ItemToPurchase::GetPrice() const {return itemPrice;}
 int ItemToPurchase::GetQuantity() const {return itemQuantity;}
