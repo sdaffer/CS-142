@@ -30,7 +30,7 @@ void ShoppingCart::AddItem(ItemToPurchase paramItem) {
         escapeHelper = 1;
     }
     else {
-        for (int i = 0; i < itemList.size(); ++i) {
+        for (unsigned int i = 0; i < itemList.size(); ++i) {
             if ((itemList.at(i).GetName() == paramItem.GetName())) {
                 cout << "Item is already found in the cart. It will not be added." << endl;
                 escapeHelper = 1;
@@ -47,7 +47,7 @@ void ShoppingCart::RemoveItem(string paramItemName) {
     bool itemFound = false;
 
     // Loop through itemList vector. If the item not found, output that it won't be removed. Otherwise, remove it. Similar to add item function
-    for (int i = 0; i < itemList.size(); ++i) {
+    for (unsigned int i = 0; i < itemList.size(); ++i) {
         if (itemList.at(i).GetName() == paramItemName) {
             // If found, remove it at the current index
             itemList.erase(itemList.begin() + i);
@@ -64,7 +64,7 @@ void ShoppingCart::UpdateQuantity(string paramItemName, int paramQuantity) {
     bool itemFound = false;
 
     // Loop through itemList vector. If item not found, output that it won't be modified. Otherwise, modify it. Similar to add and remove functions
-    for (int i = 0; i < itemList.size(); ++i) {
+    for (unsigned int i = 0; i < itemList.size(); ++i) {
         if (itemList.at(i).GetName() == paramItemName) {
             // If found, update quantity at current index
             itemList.at(i).SetQuantity(paramQuantity);
@@ -80,16 +80,21 @@ void ShoppingCart::UpdateQuantity(string paramItemName, int paramQuantity) {
 
 
 // Getters
+// I would have formatted these as one line, but the autograder didn't like it
 string ShoppingCart::GetCustomerName() const {
     return customerName;
 }
-string ShoppingCart::GetDateCreated() const {return dateCreated;}
-int ShoppingCart::GetQuantityCart() const {return itemList.size();}
+string ShoppingCart::GetDateCreated() const {
+    return dateCreated;
+}
+int ShoppingCart::GetQuantityCart() const {
+    return itemList.size();
+}
 double ShoppingCart::GetTotalCost() const {
     double totalCost = 0.0;
 
     // Loop through the itemList vector and add up all the prices using the get price function
-    for (int i = 0; i < itemList.size(); ++i) {
+    for (unsigned int i = 0; i < itemList.size(); ++i) {
         totalCost = totalCost + itemList.at(i).GetPrice();
     }
 
@@ -110,7 +115,7 @@ void ShoppingCart::PrintEachDescription() const {
     else {
         cout << endl;
         cout << "Item Descriptions" << endl;
-        for (int i = 0; i < itemList.size(); ++i) {
+        for (unsigned int i = 0; i < itemList.size(); ++i) {
             cout << itemList.at(i).GetName() << ": " << itemList.at(i).GetDescription() << endl;
         }
     }
@@ -121,7 +126,7 @@ void ShoppingCart::PrintNumberAndCost() const {
     bool emptyCart = false;
 
     // Loop through to find total number of items and update that value
-    for (int i = 0; i < itemList.size(); ++i) {
+    for (unsigned int i = 0; i < itemList.size(); ++i) {
         numItems = numItems + itemList.at(i).GetQuantity();
     }
 
@@ -141,7 +146,7 @@ void ShoppingCart::PrintNumberAndCost() const {
         cout << endl;
 
         // Loop through and use Item member function to print costs and update total cost
-        for (int i = 0; i < itemList.size(); ++i) {
+        for (unsigned int i = 0; i < itemList.size(); ++i) {
             itemList.at(i).PrintCostItem();
             totalCost = totalCost + (itemList.at(i).GetPrice() * itemList.at(i).GetQuantity());
         }

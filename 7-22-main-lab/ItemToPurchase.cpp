@@ -36,12 +36,19 @@ void ItemToPurchase::SetDescription(string descriptionParam) {
 }
 
 // Getters
+// I would have formatted these as one line, but the autograder didn't like it
 string ItemToPurchase::GetName() const {
     return itemName;
 }
-string ItemToPurchase::GetDescription() const {return itemDescription;}
-double ItemToPurchase::GetPrice() const {return itemPrice;}
-int ItemToPurchase::GetQuantity() const {return itemQuantity;}
+string ItemToPurchase::GetDescription() const {
+    return itemDescription;
+}
+double ItemToPurchase::GetPrice() const {
+    return itemPrice;
+}
+int ItemToPurchase::GetQuantity() const {
+    return itemQuantity;
+}
 
 
 // Printers
