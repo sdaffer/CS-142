@@ -9,9 +9,9 @@ using namespace std;
 
 std::string GetUserString(const std::string& prompt);
 
-void AddMenuOption(ShoppingCart& paramUserCart); //FIXME: Passby reference?
-void RemoveMenuOption(ShoppingCart paramUserCart);
-void ChangeMenuOption(ShoppingCart paramUserCart);
+void AddMenuOption(ShoppingCart& paramUserCart);
+void RemoveMenuOption(ShoppingCart& paramUserCart);
+void ChangeMenuOption(ShoppingCart& paramUserCart);
 void DescriptionsMenuOption(ShoppingCart paramUserCart);
 void CartMenuOption(ShoppingCart paramUserCart);
 void OptionsMenuOption();
@@ -19,6 +19,7 @@ void QuitMenuOption();
 
 
 int main() {
+
     std::string customerName = GetUserString("Enter Customer's Name: ");
     std::string todayDate = GetUserString("Enter Today's Date: ");
 
@@ -60,7 +61,7 @@ int main() {
     }
 
     return 0;
-}
+     }
 
 
 std::string GetUserString(const std::string& prompt) {
@@ -103,7 +104,7 @@ void AddMenuOption(ShoppingCart& paramUserCart) { //FIXME: This function is not 
     paramUserCart.AddItem(itemObject);
 }
 
-void RemoveMenuOption(ShoppingCart paramUserCart) {
+void RemoveMenuOption(ShoppingCart& paramUserCart) {
     std::string nameOfItemToRemove = GetUserString("Enter name of the item to remove: ");
 
     //TODO: Remove the item from the shopping cart
@@ -113,7 +114,7 @@ void RemoveMenuOption(ShoppingCart paramUserCart) {
     paramUserCart.RemoveItem(nameOfItemToRemove);
 }
 
-void ChangeMenuOption(ShoppingCart paramUserCart) { //FIXME: This doesn't seem to be working either
+void ChangeMenuOption(ShoppingCart& paramUserCart) { //FIXME: This doesn't seem to be working either
     std::string nameOfItemToChange = GetUserString("Enter the item name: ");
     int newItemQuantity = GetUserInt("Enter the new quantity: ");
 

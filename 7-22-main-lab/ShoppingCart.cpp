@@ -23,6 +23,7 @@ void ShoppingCart::AddItem(ItemToPurchase paramItem) { //FIXME: This function is
     // Escape helper is my way of making sure that the item is added only once when the appropriate conditions are met
     int escapeHelper = 0;
 
+    //itemList.push_back(paramItem);
     // Loop through itemList vector. If the item is already found, output that it is already found. Otherwise, add it
     if (itemList.size() == 0) {
         itemList.push_back(paramItem);
@@ -88,7 +89,7 @@ double ShoppingCart::GetTotalCost() const {
 void ShoppingCart::PrintEachDescription() const {
     // If shopping cart is empty, output so. Otherwise, loop through and print each description
 
-    if (itemList.empty() == 0) {
+    if (itemList.empty()) {
         cout << "Shopping cart is empty." << endl;
     }
     else {
@@ -104,7 +105,7 @@ void ShoppingCart::PrintNumberAndCost() const {
     double totalCost = 0.0;
 
     // If shopping cart is empty, output so. Otherwise, output number of items, subtotals and total
-    if (itemList.empty() == 0) {
+    if (itemList.empty()) {
         cout << "Shopping cart is empty." << endl;
     }
     else {
