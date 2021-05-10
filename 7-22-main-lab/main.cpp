@@ -60,7 +60,7 @@ int main() {
     }
 
     return 0;
-     }
+}
 
 
 string GetUserString(const std::string& prompt) {
