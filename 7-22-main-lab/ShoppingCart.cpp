@@ -9,7 +9,7 @@ using namespace std;
 ShoppingCart::ShoppingCart() {
     customerName = "none";
     dateCreated = "January 1, 2016";
-    itemList.resize(0); //FIXME: I added this because I wasn't sure if I needed the vector to begin with a defined size 0
+    itemList.resize(0);
 }
 // Constructor with parameters
 ShoppingCart::ShoppingCart(string paramCustomerName, string paramDateCreated) {
@@ -19,52 +19,62 @@ ShoppingCart::ShoppingCart(string paramCustomerName, string paramDateCreated) {
 
 
 // Setters
-void ShoppingCart::AddItem(ItemToPurchase paramItem) { //FIXME: This function is not working. Needs to be checked out.
+void ShoppingCart::AddItem(ItemToPurchase paramItem) {
     // Escape helper is my way of making sure that the item is added only once when the appropriate conditions are met
     int escapeHelper = 0;
 
     //itemList.push_back(paramItem);
     // Loop through itemList vector. If the item is already found, output that it is already found. Otherwise, add it
-    if (itemList.size() == 0) {
+    if (itemList.empty()) {
         itemList.push_back(paramItem);
-        escapeHelper = escapeHelper + 1;
+        escapeHelper = 1;
     }
     else {
         for (int i = 0; i < itemList.size(); ++i) {
-            if (itemList.at(i).GetName() == paramItem.GetName()) {
+            if ((itemList.at(i).GetName() == paramItem.GetName())) {
                 cout << "Item is already found in the cart. It will not be added." << endl;
-            }
-            else {
-                escapeHelper = escapeHelper + 1;
+                escapeHelper = 1;
             }
         }
     }
+
     if (escapeHelper == 0) {
         itemList.push_back(paramItem);
+        escapeHelper = 1;
     }
 }
 void ShoppingCart::RemoveItem(string paramItemName) {
+    bool itemFound = false;
+
     // Loop through itemList vector. If the item not found, output that it won't be removed. Otherwise, remove it. Similar to add item function
     for (int i = 0; i < itemList.size(); ++i) {
         if (itemList.at(i).GetName() == paramItemName) {
             // If found, remove it at the current index
             itemList.erase(itemList.begin() + i);
+            // Update itemFound bool to skip over last if statement
+            itemFound = true;
         }
-        else {
-            cout << "Item not found in cart. It will not be removed." << endl;
-        }
+    }
+
+    if (itemFound == false) {
+        cout << "Item not found in cart. It will not be removed." << endl;
     }
 }
 void ShoppingCart::UpdateQuantity(string paramItemName, int paramQuantity) {
+    bool itemFound = false;
+
     // Loop through itemList vector. If item not found, output that it won't be modified. Otherwise, modify it. Similar to add and remove functions
     for (int i = 0; i < itemList.size(); ++i) {
         if (itemList.at(i).GetName() == paramItemName) {
             // If found, update quantity at current index
             itemList.at(i).SetQuantity(paramQuantity);
+            // Update itemFound bool to skip over last if statement
+            itemFound = true;
         }
-        else {
-            cout << "Item not found in cart. It will not be modified." << endl;
-        }
+    }
+
+    if (itemFound == false) {
+        cout << "Item not found in cart. It will not be modified." << endl;
     }
 }
 
@@ -72,7 +82,7 @@ void ShoppingCart::UpdateQuantity(string paramItemName, int paramQuantity) {
 // Getters
 string ShoppingCart::GetCustomerName() const {return customerName;}
 string ShoppingCart::GetDateCreated() const {return dateCreated;}
-int ShoppingCart::GetQuantityCart() const {return itemList.size();} //FIXME: Is this the correct return?
+int ShoppingCart::GetQuantityCart() const {return itemList.size();}
 double ShoppingCart::GetTotalCost() const {
     double totalCost = 0.0;
 

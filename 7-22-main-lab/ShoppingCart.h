@@ -28,7 +28,7 @@ public:
 
 private:
     string customerName;
-    string dateCreated; // FIXME: Is string datatype the best way to do this?
+    string dateCreated;
     vector<ItemToPurchase> itemList;
 };
 
