@@ -113,12 +113,23 @@ void ShoppingCart::PrintEachDescription() const {
 }
 void ShoppingCart::PrintNumberAndCost() const {
     double totalCost = 0.0;
+    int numItems = 0;
 
     // If shopping cart is empty, output so. Otherwise, output number of items, subtotals and total
     if (itemList.empty()) {
         cout << "Shopping cart is empty." << endl;
     }
     else {
+        // Loop through to find total number of items and update that value
+        for (int i = 0; i < itemList.size(); ++i) {
+            numItems = numItems + itemList.at(i).GetQuantity();
+        }
+
+        // Output cart, name, date, and total number of items
+        cout << customerName << "'s Shopping Cart - " << dateCreated << endl;
+        cout << "Number of items: " << numItems << endl;
+        cout << endl;
+
         // Loop through and use Item member function to print costs and update total cost
         for (int i = 0; i < itemList.size(); ++i) {
             itemList.at(i).PrintCostItem();
