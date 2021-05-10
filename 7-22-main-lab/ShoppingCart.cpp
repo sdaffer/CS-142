@@ -80,7 +80,9 @@ void ShoppingCart::UpdateQuantity(string paramItemName, int paramQuantity) {
 
 
 // Getters
-string ShoppingCart::GetCustomerName() const {return customerName;}
+string ShoppingCart::GetCustomerName() const {
+    return customerName;
+}
 string ShoppingCart::GetDateCreated() const {return dateCreated;}
 int ShoppingCart::GetQuantityCart() const {return itemList.size();}
 double ShoppingCart::GetTotalCost() const {
@@ -103,6 +105,7 @@ void ShoppingCart::PrintEachDescription() const {
     // If shopping cart is empty, output so. Otherwise, loop through and print each description
     if (itemList.empty()) {
         cout << "Shopping cart is empty." << endl;
+        cout << endl;
     }
     else {
         cout << endl;
@@ -115,6 +118,7 @@ void ShoppingCart::PrintEachDescription() const {
 void ShoppingCart::PrintNumberAndCost() const {
     double totalCost = 0.0;
     int numItems = 0;
+    bool emptyCart = false;
 
     // Loop through to find total number of items and update that value
     for (int i = 0; i < itemList.size(); ++i) {
@@ -123,21 +127,28 @@ void ShoppingCart::PrintNumberAndCost() const {
 
     // Output cart, name, date, and total number of items
     cout << customerName << "'s Shopping Cart - " << dateCreated << endl;
-    cout << "Number of items: " << numItems << endl;
-    cout << endl;
+
 
     // If shopping cart is empty, output so. Otherwise, output number of items, subtotals and total
     if (itemList.empty()) {
         cout << "Shopping cart is empty." << endl;
+        cout << endl;
+        emptyCart = true;
     }
     else {
+        // Output the number of items beneath name and date
+        cout << "Number of items: " << numItems << endl;
+        cout << endl;
+
         // Loop through and use Item member function to print costs and update total cost
         for (int i = 0; i < itemList.size(); ++i) {
             itemList.at(i).PrintCostItem();
             totalCost = totalCost + (itemList.at(i).GetPrice() * itemList.at(i).GetQuantity());
         }
     }
-    // Output total cost - set precision for standard dollar form
-    cout << fixed << setprecision(2);
-    cout << "Total: $" << totalCost << endl;
+    // If cart IS NOT empty, output total cost - set precision for standard dollar form
+    if (!emptyCart) {
+        cout << fixed << setprecision(2);
+        cout << "Total: $" << totalCost << endl;
+    }
 }
