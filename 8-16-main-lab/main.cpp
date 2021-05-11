@@ -25,7 +25,7 @@ void RemovePlaylistMenuOption(vector <Playlist*> &paramUserPlaylists);
 void RemoveSongFromPlaylistMenuOption(vector <Playlist*> &paramUserPlaylists);
 void RemoveSongFromLibraryMenuOption(vector <Song*> &paramUserSongs);
 void OptionsMenuOption();
-void QuitMenuOption();
+void QuitMenuOption(vector <Song*> &paramUserSongs);
 
 
 // Main function
@@ -73,7 +73,7 @@ int main() {
             OptionsMenuOption();
         }
         else if (userMenuChoice == "quit") {
-            QuitMenuOption();
+            QuitMenuOption(allSongs);
             continueMenuLoop = false;
         }
         else {
@@ -200,16 +200,53 @@ void RemovePlaylistMenuOption(vector <Playlist*> &paramUserPlaylists) {
     // Get user input
     cout << "Pick a playlist index number to remove: ";
     cin >> userPlayListIndex;
+    cout << endl;
 
-
+    // Deallocate memory and remove from the allplaylists vector
+    // TODO: Is this the right way to deallocate memory and remove the playlist?
+    delete paramUserPlaylists.at(userPlayListIndex);
+    paramUserPlaylists.erase(paramUserPlaylists.begin() + userPlayListIndex);
 }
 
 void RemoveSongFromPlaylistMenuOption(vector <Playlist*> &paramUserPlaylists) {
-    //TODO: Implement this menu option
+    int userPlaylistIndex = 0;
+    int userSongIndex = 0;
+
+    // Call the main function to list all playlists
+    ListPlaylistsMenuOption(paramUserPlaylists);
+
+    // Get user input
+    cout << "Pick a playlist index number: ";
+    cin >> userPlaylistIndex;
+    cout << endl;
+
+    // Output all songs on that user specified playlist and get input on index of song to remove
+    paramUserPlaylists.at(userPlaylistIndex)->ListAllSongsOnPlaylist();
+    cout << "Pick a song index number to remove: ";
+    cin >> userSongIndex;
+    cout << endl;
+
+    // Use the playlist member function to deallocate memory and remove the song from the vector
+    // Deallocation and removal handled in the member function
+    paramUserPlaylists.at(userPlaylistIndex)->RemoveSongFromPlaylist(userSongIndex);
 }
 
 void RemoveSongFromLibraryMenuOption(vector <Song*> &paramUserSongs) {
-    //TODO: Implement this menu option
+    int userSongIndex = 0;
+
+    // Output all songs in the allsongs vector
+    for (unsigned int i = 0; paramUserSongs.size(); ++i) {
+        cout << "  " << i << ": " << paramUserSongs.at(i)->GetSongName() << endl;
+    }
+
+    // Get user input
+    cout << "Pick a song index number to remove: ";
+    cin >> userSongIndex;
+
+    // Deallocate memory and remove the song from the vector
+    // TODO: Is this the right way to deallocate memory and remove the song?
+    delete paramUserSongs.at(userSongIndex);
+    paramUserSongs.erase(paramUserSongs.begin() + userSongIndex);
 }
 
 void OptionsMenuOption() {
@@ -226,8 +263,15 @@ void OptionsMenuOption() {
               << "quit     Quits the program" << std::endl << std::endl;
 }
 
-void QuitMenuOption() {
+void QuitMenuOption(vector <Song*> &paramUserSongs) {
     std::cout << "Goodbye!" << std::endl;
+
     // TODO: Need to delete all songs in this function before the code terminates
+    // Deallocate memory for all songs and remove them from the vector
+    for (unsigned int i = 0; i < paramUserSongs.size(); ++i) {
+        delete paramUserSongs.at(i);
+        paramUserSongs.pop_back();
+    }
+
     exit(0);
 }

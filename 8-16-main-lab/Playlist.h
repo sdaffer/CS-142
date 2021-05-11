@@ -15,12 +15,16 @@ public:
     // Setters
     void SetPlaylistName(string paramPlayListName);
     void AddSongToPlaylist(Song *songToAdd);
+    void RemoveSongFromPlaylist(int paramSongIndex);
 
     // Getters
     string GetPlayListName() const;
 
     // Play playlist member function
     void PlayPlaylist() const;
+
+    // List all songs on playlist member function
+    void ListAllSongsOnPlaylist() const;
 
 private:
     string playlistName;
