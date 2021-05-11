@@ -4,12 +4,15 @@
 
 using namespace std;
 
-//TODO: Include your class files here
-
+// Class files
+#include "Song.h"
+#include "Playlist.h"
 
 // TODO: clean up memory when it is no longer used
 //  (you need to find the appropriate places in the code to do this)
 
+
+// Function prototypes
 std::string GetUserString(const std::string& prompt);
 
 void AddSongsMenuOption(/*TODO: list any parameters here*/);
@@ -24,6 +27,8 @@ void RemoveSongFromLibraryMenuOption(/*TODO: list any parameters here*/);
 void OptionsMenuOption(/*TODO: list any parameters here*/);
 void QuitMenuOption(/*TODO: list any parameters here*/);
 
+
+// Main function
 int main() {
     std::cout << "Welcome to the Firstline Player!  Enter options to see menu options." << std::endl << std::endl;
 
@@ -63,14 +68,14 @@ int main() {
             RemoveSongFromLibraryMenuOption(/*TODO: list any arguments here*/);
         }
         else if (userMenuChoice == "options") {
-            OptionsMenuOption(/*TODO: list any arguments here*/);
+            OptionsMenuOption();
         }
         else if (userMenuChoice == "quit") {
-            QuitMenuOption(/*TODO: list any arguments here*/);
+            QuitMenuOption();
             continueMenuLoop = false;
         }
         else {
-            OptionsMenuOption(/*TODO: list any arguments here*/);
+            OptionsMenuOption();
         }
     }
 
@@ -78,6 +83,7 @@ int main() {
 }
 
 
+// Function definitions
 std::string GetUserString(const std::string& prompt) {
     std::string userAnswer = "none";
 
@@ -148,7 +154,7 @@ void RemoveSongFromLibraryMenuOption(/*TODO: list any parameters here*/) {
     //TODO: Implement this menu option
 }
 
-void OptionsMenuOption(/*TODO: list any parameters here*/) {
+void OptionsMenuOption() {
     std::cout << "add      Adds a list of songs to the library" << std::endl
               << "list     Lists all the songs in the library" << std::endl
               << "addp     Adds a new playlist" << std::endl
@@ -162,6 +168,7 @@ void OptionsMenuOption(/*TODO: list any parameters here*/) {
               << "quit     Quits the program" << std::endl << std::endl;
 }
 
-void QuitMenuOption(/*TODO: list any parameters here*/) {
+void QuitMenuOption() {
     std::cout << "Goodbye!" << std::endl;
+    exit(0);
 }
