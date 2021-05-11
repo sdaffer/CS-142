@@ -46,6 +46,6 @@ int Song::GetPlayCount() const {
 
 // Play song member function. This will increase the playcount for us as well
 void Song::PlaySong() {
-    cout << firstLine;
+    cout << firstLine << endl;
     playCount = playCount + 1;
 }
