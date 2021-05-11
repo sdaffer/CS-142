@@ -15,7 +15,8 @@ public:
     // Setters
     void SetPlaylistName(string paramPlayListName);
     void AddSongToPlaylist(Song *songToAdd);
-    void RemoveSongFromPlaylist(int paramSongIndex);
+    void RemoveSongFromPlaylistAtIndex(int paramSongIndex);
+    void RemoveSongFromPlaylist(string songName);
 
     // Getters
     string GetPlayListName() const;
