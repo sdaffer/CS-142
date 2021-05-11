@@ -15,17 +15,17 @@ using namespace std;
 // Function prototypes
 std::string GetUserString(const std::string& prompt);
 
-void AddSongsMenuOption(/*TODO: list any parameters here*/);
-void ListSongsMenuOption(/*TODO: list any parameters here*/);
-void AddPlaylistMenuOption(/*TODO: list any parameters here*/);
-void AddSongToPlaylistMenuOption(/*TODO: list any parameters here*/);
-void ListPlaylistsMenuOption(/*TODO: list any parameters here*/);
-void PlayPlaylistMenuOption(/*TODO: list any parameters here*/);
-void RemovePlaylistMenuOption(/*TODO: list any parameters here*/);
-void RemoveSongFromPlaylistMenuOption(/*TODO: list any parameters here*/);
-void RemoveSongFromLibraryMenuOption(/*TODO: list any parameters here*/);
-void OptionsMenuOption(/*TODO: list any parameters here*/);
-void QuitMenuOption(/*TODO: list any parameters here*/);
+void AddSongsMenuOption(vector <Song*> &paramUserSongs);
+void ListSongsMenuOption(vector <Song*> paramUserSongs);
+void AddPlaylistMenuOption(vector <Playlist*> &paramUserPlaylists);
+void AddSongToPlaylistMenuOption(vector <Playlist*> &paramUserPlaylists);
+void ListPlaylistsMenuOption(vector <Playlist*> paramUserPlaylists);
+void PlayPlaylistMenuOption(vector <Playlist*> paramUserPlaylists);
+void RemovePlaylistMenuOption(vector <Playlist*> &paramUserPlaylists);
+void RemoveSongFromPlaylistMenuOption(vector <Playlist*> &paramUserPlaylists);
+void RemoveSongFromLibraryMenuOption(vector <Song*> &paramUserSongs);
+void OptionsMenuOption();
+void QuitMenuOption();
 
 
 // Main function
@@ -33,6 +33,8 @@ int main() {
     std::cout << "Welcome to the Firstline Player!  Enter options to see menu options." << std::endl << std::endl;
 
     //TODO: Create vectors to hold the songs and playlists
+    vector<Song*> allSongs; // TODO: is the astrix what's needed here?
+    vector<Playlist*> allPlaylists;
 
     std::string userMenuChoice = "none";
     bool continueMenuLoop = true;
@@ -41,31 +43,31 @@ int main() {
         userMenuChoice = GetUserString("Enter your selection now: ");
 
         if (userMenuChoice == "add") {
-            AddSongsMenuOption(/*TODO: list any arguments here*/);
+            AddSongsMenuOption(allSongs);
         }
         else if (userMenuChoice == "list") {
-            ListSongsMenuOption(/*TODO: list any arguments here*/);
+            ListSongsMenuOption(allSongs);
         }
         else if (userMenuChoice == "addp") {
-            AddPlaylistMenuOption(/*TODO: list any arguments here*/);
+            AddPlaylistMenuOption(allPlaylists);
         }
         else if (userMenuChoice == "addsp") {
-            AddSongToPlaylistMenuOption(/*TODO: list any arguments here*/);
+            AddSongToPlaylistMenuOption(allPlaylists);
         }
         else if (userMenuChoice == "listp") {
-            ListPlaylistsMenuOption(/*TODO: list any arguments here*/);
+            ListPlaylistsMenuOption(allPlaylists);
         }
         else if (userMenuChoice == "play") {
-            PlayPlaylistMenuOption(/*TODO: list any arguments here*/);
+            PlayPlaylistMenuOption(allPlaylists);
         }
         else if (userMenuChoice == "remp") {
-            RemovePlaylistMenuOption(/*TODO: list any arguments here*/);
+            RemovePlaylistMenuOption(allPlaylists);
         }
         else if (userMenuChoice == "remsp") {
-            RemoveSongFromPlaylistMenuOption(/*TODO: list any arguments here*/);
+            RemoveSongFromPlaylistMenuOption(allPlaylists);
         }
         else if (userMenuChoice == "remsl") {
-            RemoveSongFromLibraryMenuOption(/*TODO: list any arguments here*/);
+            RemoveSongFromLibraryMenuOption(allSongs);
         }
         else if (userMenuChoice == "options") {
             OptionsMenuOption();
@@ -102,7 +104,7 @@ int GetUserInt(const std::string& prompt) {
     return userAnswer;
 }
 
-void AddSongsMenuOption(/*TODO: list any parameters here*/) {
+void AddSongsMenuOption(vector <Song*> &paramUserSongs) {
     const std::string DONE_KEYWORD = "DONE";
     std::cout << "Enter songs' names and first lines"
               << " (type \"" << DONE_KEYWORD << "\" when done):" << std::endl;
@@ -118,39 +120,51 @@ void AddSongsMenuOption(/*TODO: list any parameters here*/) {
         // .
         // This should be just 1-2 lines of code to create the song and add it to the list
 
+        // Creating new song object with new to allocate memory
+        Song* newSong = new Song(songName, firstLine); // Play count initialized to 0 in constructors
+        paramUserSongs.push_back(newSong);
+
         songName = GetUserString("Song Name: ");
     }
 }
 
-void ListSongsMenuOption(/*TODO: list any parameters here*/) {
+void ListSongsMenuOption(vector <Song*> paramUserSongs) {
+    for (unsigned int i = 0; i < paramUserSongs.size(); ++i) {
+        cout << paramUserSongs.at(i)->GetSongName() << ": \"" << paramUserSongs.at(i)->GetFirstLine() << "\", ";
+        cout << paramUserSongs.at(i)->GetPlayCount() << " play(s)." << endl;
+    }
+}
+
+void AddPlaylistMenuOption(vector <Playlist*> &paramUserPlaylists) {
+    string userPlaylistName = "";
+    cout << "Playlist name: ";
+    cin >> userPlaylistName;
+
+    Playlist* newPlaylist = new Playlist(userPlaylistName);
+    paramUserPlaylists.push_back(newPlaylist);
+}
+
+void AddSongToPlaylistMenuOption(vector <Playlist*> &paramUserPlaylists) {
+
+}
+
+void ListPlaylistsMenuOption(vector <Playlist*> paramUserPlaylists) {
     //TODO: Implement this menu option
 }
 
-void AddPlaylistMenuOption(/*TODO: list any parameters here*/) {
+void PlayPlaylistMenuOption(vector <Playlist*> paramUserPlaylists) {
     //TODO: Implement this menu option
 }
 
-void AddSongToPlaylistMenuOption(/*TODO: list any parameters here*/) {
+void RemovePlaylistMenuOption(vector <Playlist*> &paramUserPlaylists) {
     //TODO: Implement this menu option
 }
 
-void ListPlaylistsMenuOption(/*TODO: list any parameters here*/) {
+void RemoveSongFromPlaylistMenuOption(vector <Playlist*> &paramUserPlaylists) {
     //TODO: Implement this menu option
 }
 
-void PlayPlaylistMenuOption(/*TODO: list any parameters here*/) {
-    //TODO: Implement this menu option
-}
-
-void RemovePlaylistMenuOption(/*TODO: list any parameters here*/) {
-    //TODO: Implement this menu option
-}
-
-void RemoveSongFromPlaylistMenuOption(/*TODO: list any parameters here*/) {
-    //TODO: Implement this menu option
-}
-
-void RemoveSongFromLibraryMenuOption(/*TODO: list any parameters here*/) {
+void RemoveSongFromLibraryMenuOption(vector <Song*> &paramUserSongs) {
     //TODO: Implement this menu option
 }
 
@@ -170,5 +184,6 @@ void OptionsMenuOption() {
 
 void QuitMenuOption() {
     std::cout << "Goodbye!" << std::endl;
+    // TODO: Need to delete all songs in this function before the code terminates
     exit(0);
 }

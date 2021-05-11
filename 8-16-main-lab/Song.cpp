@@ -1,4 +1,4 @@
-// TODO: Do I have any standard libraries needed here?
+#include <iostream>
 using namespace std;
 
 // Class header
@@ -7,7 +7,7 @@ using namespace std;
 // Constructors
 // Default constructor
 Song::Song() {
-    songName = "no name";
+    songName = "no song name";
     firstLine = "no first line";
     playCount = 0;
 }
@@ -42,4 +42,10 @@ string Song::GetFirstLine() const {
 }
 int Song::GetPlayCount() const {
     return playCount;
+}
+
+// Play song member function. This will increase the playcount for us as well
+void Song::PlaySong() {
+    cout << firstLine;
+    playCount = playCount + 1;
 }
