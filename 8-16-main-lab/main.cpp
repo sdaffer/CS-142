@@ -18,7 +18,7 @@ std::string GetUserString(const std::string& prompt);
 void AddSongsMenuOption(vector <Song*> &paramUserSongs);
 void ListSongsMenuOption(vector <Song*> paramUserSongs);
 void AddPlaylistMenuOption(vector <Playlist*> &paramUserPlaylists);
-void AddSongToPlaylistMenuOption(vector <Playlist*> &paramUserPlaylists);
+void AddSongToPlaylistMenuOption(vector <Playlist*> &paramUserPlaylists, vector <Song*> paramUserSongs);
 void ListPlaylistsMenuOption(vector <Playlist*> paramUserPlaylists);
 void PlayPlaylistMenuOption(vector <Playlist*> paramUserPlaylists);
 void RemovePlaylistMenuOption(vector <Playlist*> &paramUserPlaylists);
@@ -52,7 +52,7 @@ int main() {
             AddPlaylistMenuOption(allPlaylists);
         }
         else if (userMenuChoice == "addsp") {
-            AddSongToPlaylistMenuOption(allPlaylists);
+            AddSongToPlaylistMenuOption(allPlaylists, allSongs);
         }
         else if (userMenuChoice == "listp") {
             ListPlaylistsMenuOption(allPlaylists);
@@ -144,20 +144,64 @@ void AddPlaylistMenuOption(vector <Playlist*> &paramUserPlaylists) {
     paramUserPlaylists.push_back(newPlaylist);
 }
 
-void AddSongToPlaylistMenuOption(vector <Playlist*> &paramUserPlaylists) {
+void AddSongToPlaylistMenuOption(vector <Playlist*> &paramUserPlaylists, vector <Song*> paramUserSongs) { // TODO: Does this need to be moved to after the ListPlaylist function? (BC it calls it?)
+    int userPlaylistIndex = 0;
+    int userSongIndex = 0;
+
+    // List all of the playlist by calling the function that's already built to do it
+    ListPlaylistsMenuOption(paramUserPlaylists);
+
+    // Get user input
+    cout << "Pick a playlist index number: ";
+    cin >> userPlaylistIndex;
+
+    // Output all of the songs in the library
+    for (unsigned int i = 0; i < paramUserSongs.size(); ++i) {
+        cout << "  " << i << ": " << paramUserSongs.at(i)->GetSongName() << endl;
+    }
+
+    // Get user input
+    cout << "Pick a song index number: ";
+    cin >> userSongIndex;
+    cout << endl;
+
+    // Now add the song to the playlist
+    paramUserPlaylists.at(userPlaylistIndex)->AddSongToPlaylist(paramUserSongs.at(userSongIndex));
 
 }
 
 void ListPlaylistsMenuOption(vector <Playlist*> paramUserPlaylists) {
-    //TODO: Implement this menu option
+    // Loop through the allplaylist vector and list each one
+    for (unsigned int i = 0; i < paramUserPlaylists.size(); ++i) {
+        cout << "  " << i << ": " << paramUserPlaylists.at(i)->GetPlayListName() << endl;
+    }
 }
 
 void PlayPlaylistMenuOption(vector <Playlist*> paramUserPlaylists) {
-    //TODO: Implement this menu option
+    int userPlaylistIndex = 0;
+
+    // Call the main function to list all playlists
+    ListPlaylistsMenuOption(paramUserPlaylists);
+
+    // Get user input
+    cout << "Pick a playlist index number: ";
+    cin >> userPlaylistIndex;
+
+    // Call the playlist member function to deal with the actual playing
+    paramUserPlaylists.at(userPlaylistIndex)->PlayPlaylist();
 }
 
 void RemovePlaylistMenuOption(vector <Playlist*> &paramUserPlaylists) {
-    //TODO: Implement this menu option
+    int userPlayListIndex = 0;
+
+    // Call the main function to list all playlists
+    ListPlaylistsMenuOption(paramUserPlaylists);
+
+    // Get user input
+    cout << "Pick a playlist index number to remove: ";
+    cin >> userPlayListIndex;
+
+
 }
 
 void RemoveSongFromPlaylistMenuOption(vector <Playlist*> &paramUserPlaylists) {
