@@ -137,11 +137,12 @@ void ListSongsMenuOption(vector <Song*> paramUserSongs) {
 
 void AddPlaylistMenuOption(vector <Playlist*> &paramUserPlaylists) {
     string userPlaylistName = "";
-    cout << "Playlist name: ";
-    cin >> userPlaylistName;
+    userPlaylistName = GetUserString("Playlist name: ");
 
     Playlist* newPlaylist = new Playlist(userPlaylistName);
     paramUserPlaylists.push_back(newPlaylist);
+
+    userPlaylistName = "";
 }
 
 void AddSongToPlaylistMenuOption(vector <Playlist*> &paramUserPlaylists, vector <Song*> paramUserSongs) { // TODO: Does this need to be moved to after the ListPlaylist function? (BC it calls it?)
@@ -152,8 +153,7 @@ void AddSongToPlaylistMenuOption(vector <Playlist*> &paramUserPlaylists, vector 
     ListPlaylistsMenuOption(paramUserPlaylists);
 
     // Get user input
-    cout << "Pick a playlist index number: ";
-    cin >> userPlaylistIndex;
+    userPlaylistIndex = GetUserInt("Pick a playlist index number: ");
 
     // Output all of the songs in the library
     for (unsigned int i = 0; i < paramUserSongs.size(); ++i) {
@@ -161,9 +161,7 @@ void AddSongToPlaylistMenuOption(vector <Playlist*> &paramUserPlaylists, vector 
     }
 
     // Get user input
-    cout << "Pick a song index number: ";
-    cin >> userSongIndex;
-    cout << endl;
+    userSongIndex = GetUserInt("Pick a song index number: ");
 
     // Now add the song to the playlist
     paramUserPlaylists.at(userPlaylistIndex)->AddSongToPlaylist(paramUserSongs.at(userSongIndex));
@@ -184,8 +182,7 @@ void PlayPlaylistMenuOption(vector <Playlist*> paramUserPlaylists) {
     ListPlaylistsMenuOption(paramUserPlaylists);
 
     // Get user input
-    cout << "Pick a playlist index number: ";
-    cin >> userPlaylistIndex;
+    userPlaylistIndex = GetUserInt("Pick a playlist index number: ");
 
     // Call the playlist member function to deal with the actual playing
     paramUserPlaylists.at(userPlaylistIndex)->PlayPlaylist();
@@ -198,9 +195,7 @@ void RemovePlaylistMenuOption(vector <Playlist*> &paramUserPlaylists) {
     ListPlaylistsMenuOption(paramUserPlaylists);
 
     // Get user input
-    cout << "Pick a playlist index number to remove: ";
-    cin >> userPlayListIndex;
-    cout << endl;
+    userPlayListIndex = GetUserInt("Pick a playlist index number to remove: ");
 
     // Deallocate memory and remove from the allplaylists vector
     // TODO: Is this the right way to deallocate memory and remove the playlist?
@@ -216,15 +211,11 @@ void RemoveSongFromPlaylistMenuOption(vector <Playlist*> &paramUserPlaylists) {
     ListPlaylistsMenuOption(paramUserPlaylists);
 
     // Get user input
-    cout << "Pick a playlist index number: ";
-    cin >> userPlaylistIndex;
-    cout << endl;
+    userPlaylistIndex = GetUserInt("Pick a playlist index number: ");
 
     // Output all songs on that user specified playlist and get input on index of song to remove
     paramUserPlaylists.at(userPlaylistIndex)->ListAllSongsOnPlaylist();
-    cout << "Pick a song index number to remove: ";
-    cin >> userSongIndex;
-    cout << endl;
+    userSongIndex = GetUserInt("Pick a song index number to remove: ");
 
     // Use the playlist member function to deallocate memory and remove the song from the vector
     // Deallocation and removal handled in the member function
@@ -240,8 +231,7 @@ void RemoveSongFromLibraryMenuOption(vector <Song*> &paramUserSongs, vector <Pla
     }
 
     // Get user input
-    cout << "Pick a song index number to remove: ";
-    cin >> userSongIndex;
+    userSongIndex = GetUserInt("Pick a song index number to remove: ");
 
 
     // Remove from all playlists that the song was added to
@@ -282,14 +272,11 @@ void QuitMenuOption(vector <Song*> &paramUserSongs, vector <Playlist*> &paramUse
         }
         else {
             string songNameToDelete = "";
-            cout << "stop1" << endl;
             songNameToDelete = paramUserSongs.at(i)->GetSongName();
             delete paramUserSongs.at(i);
-            cout << "stop2" << endl;
             // FIXME: THe problem is in this line below. I'll try to modify it
             paramUserPlaylists.at(i)->RemoveSongFromPlaylistAtIndex(i); // Deleting memory is handled inside this member function
             //paramUserPlaylists.at(i)->RemoveSongFromPlaylist(songNameToDelete);
-            cout << "stop3" << endl;
         }
     }
 
