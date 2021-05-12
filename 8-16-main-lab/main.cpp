@@ -276,8 +276,21 @@ void QuitMenuOption(vector <Song*> &paramUserSongs, vector <Playlist*> &paramUse
 
     // Deallocate memory for all songs before exiting
     for (unsigned int i = 0; i < paramUserSongs.size(); ++i) {
-        delete paramUserSongs.at(i);
-        paramUserPlaylists.at(i)->RemoveSongFromPlaylistAtIndex(i); // Deleting memory is handled inside this member function
+        // The following if condition makes sure we don't try to access a vector out of range
+        if ((paramUserSongs.size() == 0) || (paramUserPlaylists.size() == 0)) {
+            break;
+        }
+        else {
+            string songNameToDelete = "";
+            cout << "stop1" << endl;
+            songNameToDelete = paramUserSongs.at(i)->GetSongName();
+            delete paramUserSongs.at(i);
+            cout << "stop2" << endl;
+            // FIXME: THe problem is in this line below. I'll try to modify it
+            paramUserPlaylists.at(i)->RemoveSongFromPlaylistAtIndex(i); // Deleting memory is handled inside this member function
+            //paramUserPlaylists.at(i)->RemoveSongFromPlaylist(songNameToDelete);
+            cout << "stop3" << endl;
+        }
     }
 
     exit(0);
