@@ -24,19 +24,14 @@ void Playlist::AddSongToPlaylist(Song *songToAdd) {
     songsOnPlaylist.push_back(songToAdd);
 }
 void Playlist::RemoveSongFromPlaylistAtIndex(int paramSongIndex) {
-    cout << "substop1" << endl;
-    delete songsOnPlaylist.at(paramSongIndex);
-    cout << "substop2" << endl;
     songsOnPlaylist.erase(songsOnPlaylist.begin() + paramSongIndex);
-    cout << "substop3" << endl;
 }
 void Playlist::RemoveSongFromPlaylist(string songName) {
     // Loop through all songs on the playlist object and remove anytime the song name matches the parameter
     for (unsigned int i = 0; i < songsOnPlaylist.size(); ++i) {
         if (songName == songsOnPlaylist.at(i)->GetSongName()) {
-            // Deallocate memory and remove from playlist
-            delete songsOnPlaylist.at(i);
-            songsOnPlaylist.erase(songsOnPlaylist.begin() + i); //FIXME: What references are needed? * or &?
+            // Remove from playlist
+            songsOnPlaylist.erase(songsOnPlaylist.begin() + i);
             break;
         }
     }

@@ -19,7 +19,6 @@ public:
     string GetFirstLine() const;
     int GetPlayCount() const;
 
-    // TODO: Will I need printers? Not sure yet. Check later.
     // Play song member function. This will increase the playcount for us as well
     void PlaySong();
 

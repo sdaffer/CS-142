@@ -29,7 +29,7 @@ public:
 
 private:
     string playlistName;
-    vector <Song*> songsOnPlaylist;// TODO: Is an asterisk needed here?
+    vector <Song*> songsOnPlaylist;
 
 };
 

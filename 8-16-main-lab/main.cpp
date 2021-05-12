@@ -8,10 +8,6 @@ using namespace std;
 #include "Song.h"
 #include "Playlist.h"
 
-// TODO: clean up memory when it is no longer used
-//  (you need to find the appropriate places in the code to do this)
-
-
 // Function prototypes
 std::string GetUserString(const std::string& prompt);
 
@@ -32,8 +28,8 @@ void QuitMenuOption(vector <Song*> &paramUserSongs, vector <Playlist*> &paramUse
 int main() {
     std::cout << "Welcome to the Firstline Player!  Enter options to see menu options." << std::endl << std::endl;
 
-    //TODO: Create vectors to hold the songs and playlists
-    vector<Song*> allSongs; // TODO: is the astrix what's needed here?
+    //Create vectors to hold the songs and playlists
+    vector<Song*> allSongs;
     vector<Playlist*> allPlaylists;
 
     std::string userMenuChoice = "none";
@@ -116,16 +112,13 @@ void AddSongsMenuOption(vector <Song*> &paramUserSongs) {
     while (songName != DONE_KEYWORD) {
         firstLine = GetUserString("Song's first line: ");
 
-        //TODO: Create a Song using `songName` and `firstLine` and add it to allSongs,
-        // .
-        // This should be just 1-2 lines of code to create the song and add it to the list
-
         // Creating new song object with new to allocate memory
         Song* newSong = new Song(songName, firstLine); // Play count initialized to 0 in constructors
         paramUserSongs.push_back(newSong);
 
         songName = GetUserString("Song Name: ");
     }
+    cout << endl;
 }
 
 void ListSongsMenuOption(vector <Song*> paramUserSongs) {
@@ -142,10 +135,10 @@ void AddPlaylistMenuOption(vector <Playlist*> &paramUserPlaylists) {
     Playlist* newPlaylist = new Playlist(userPlaylistName);
     paramUserPlaylists.push_back(newPlaylist);
 
-    userPlaylistName = "";
+    cout << endl;
 }
 
-void AddSongToPlaylistMenuOption(vector <Playlist*> &paramUserPlaylists, vector <Song*> paramUserSongs) { // TODO: Does this need to be moved to after the ListPlaylist function? (BC it calls it?)
+void AddSongToPlaylistMenuOption(vector <Playlist*> &paramUserPlaylists, vector <Song*> paramUserSongs) {
     int userPlaylistIndex = 0;
     int userSongIndex = 0;
 
@@ -166,6 +159,8 @@ void AddSongToPlaylistMenuOption(vector <Playlist*> &paramUserPlaylists, vector 
     // Now add the song to the playlist
     paramUserPlaylists.at(userPlaylistIndex)->AddSongToPlaylist(paramUserSongs.at(userSongIndex));
 
+    cout << endl;
+
 }
 
 void ListPlaylistsMenuOption(vector <Playlist*> paramUserPlaylists) {
@@ -173,6 +168,7 @@ void ListPlaylistsMenuOption(vector <Playlist*> paramUserPlaylists) {
     for (unsigned int i = 0; i < paramUserPlaylists.size(); ++i) {
         cout << "  " << i << ": " << paramUserPlaylists.at(i)->GetPlayListName() << endl;
     }
+    cout << endl;
 }
 
 void PlayPlaylistMenuOption(vector <Playlist*> paramUserPlaylists) {
@@ -183,6 +179,8 @@ void PlayPlaylistMenuOption(vector <Playlist*> paramUserPlaylists) {
 
     // Get user input
     userPlaylistIndex = GetUserInt("Pick a playlist index number: ");
+    cout << endl;
+    cout << "Playing songs from playlist: " << paramUserPlaylists.at(userPlaylistIndex)->GetPlayListName() << endl;
 
     // Call the playlist member function to deal with the actual playing
     paramUserPlaylists.at(userPlaylistIndex)->PlayPlaylist();
@@ -198,7 +196,6 @@ void RemovePlaylistMenuOption(vector <Playlist*> &paramUserPlaylists) {
     userPlayListIndex = GetUserInt("Pick a playlist index number to remove: ");
 
     // Deallocate memory and remove from the allplaylists vector
-    // TODO: Is this the right way to deallocate memory and remove the playlist?
     delete paramUserPlaylists.at(userPlayListIndex);
     paramUserPlaylists.erase(paramUserPlaylists.begin() + userPlayListIndex);
 }
@@ -217,8 +214,7 @@ void RemoveSongFromPlaylistMenuOption(vector <Playlist*> &paramUserPlaylists) {
     paramUserPlaylists.at(userPlaylistIndex)->ListAllSongsOnPlaylist();
     userSongIndex = GetUserInt("Pick a song index number to remove: ");
 
-    // Use the playlist member function to deallocate memory and remove the song from the vector
-    // Deallocation and removal handled in the member function
+    // Use the playlist member function to remove the song from the vector
     paramUserPlaylists.at(userPlaylistIndex)->RemoveSongFromPlaylistAtIndex(userSongIndex);
 }
 
@@ -236,8 +232,6 @@ void RemoveSongFromLibraryMenuOption(vector <Song*> &paramUserSongs, vector <Pla
 
     // Remove from all playlists that the song was added to
     for (unsigned int i = 0; i < paramUserPlaylists.size(); ++i) {
-        // Memory deallocation is handled by the removesongfromplaylist member function
-        // TODO: The following line causes the program to abort. It doesn't work.
         paramUserPlaylists.at(i)->RemoveSongFromPlaylist(paramUserSongs.at(userSongIndex)->GetSongName());
     }
 
@@ -266,18 +260,7 @@ void QuitMenuOption(vector <Song*> &paramUserSongs, vector <Playlist*> &paramUse
 
     // Deallocate memory for all songs before exiting
     for (unsigned int i = 0; i < paramUserSongs.size(); ++i) {
-        // The following if condition makes sure we don't try to access a vector out of range
-        if ((paramUserSongs.size() == 0) || (paramUserPlaylists.size() == 0)) {
-            break;
-        }
-        else {
-            string songNameToDelete = "";
-            songNameToDelete = paramUserSongs.at(i)->GetSongName();
-            delete paramUserSongs.at(i);
-            // FIXME: THe problem is in this line below. I'll try to modify it
-            paramUserPlaylists.at(i)->RemoveSongFromPlaylistAtIndex(i); // Deleting memory is handled inside this member function
-            //paramUserPlaylists.at(i)->RemoveSongFromPlaylist(songNameToDelete);
-        }
+        delete paramUserSongs.at(i);
     }
 
     exit(0);
