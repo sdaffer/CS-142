@@ -32,12 +32,8 @@ void Playlist::RemoveSongFromPlaylist(string songName) {
     for (unsigned int i = 0; i < songsOnPlaylist.size(); ++i) {
         if (songName == songsOnPlaylist.at(i)->GetSongName()) {
             // Deallocate memory and remove from playlist
-            cout << "IT FOUND THE NAME" << endl;
-            delete songsOnPlaylist.at(i);
-            cout << "IT DEALLOCATED MEMORY" << endl;
-            songsOnPlaylist.erase(songsOnPlaylist.begin() + i);
-            cout << "IT ERASED THE SONG ON PLAYLIST VECTOR" << endl;
-            //FIXME: The loop gets at least to this point. I think that there's an error because the loop doesn't have the correct range after the song is removed
+            delete &songsOnPlaylist.at(i);
+            *songsOnPlaylist.erase(songsOnPlaylist.begin() + i); //FIXME: What references are needed? * or &?
             break;
         }
     }
