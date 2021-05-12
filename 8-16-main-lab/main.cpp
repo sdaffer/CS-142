@@ -196,7 +196,7 @@ void RemovePlaylistMenuOption(vector <Playlist*> &paramUserPlaylists) {
     userPlayListIndex = GetUserInt("Pick a playlist index number to remove: ");
 
     // Deallocate memory and remove from the allplaylists vector
-    delete paramUserPlaylists.at(userPlayListIndex);
+    delete paramUserPlaylists.at(userPlayListIndex); // Freeing memory
     paramUserPlaylists.erase(paramUserPlaylists.begin() + userPlayListIndex);
 }
 
@@ -236,7 +236,7 @@ void RemoveSongFromLibraryMenuOption(vector <Song*> &paramUserSongs, vector <Pla
     }
 
     // Deallocate memory and remove the song from the library vector
-    delete paramUserSongs.at(userSongIndex);
+    delete paramUserSongs.at(userSongIndex); // Freeing memory
     paramUserSongs.erase(paramUserSongs.begin() + userSongIndex);
 
 }
@@ -260,7 +260,7 @@ void QuitMenuOption(vector <Song*> &paramUserSongs, vector <Playlist*> &paramUse
 
     // Deallocate memory for all songs before exiting
     for (unsigned int i = 0; i < paramUserSongs.size(); ++i) {
-        delete paramUserSongs.at(i);
+        delete paramUserSongs.at(i); // Freeing memory
     }
 
     exit(0);
