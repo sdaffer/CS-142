@@ -1,25 +1,28 @@
 #include <iostream>
 using namespace std;
 
+
 // Function prototypes
 double CalculateDrinkCost(int paramNumDrinks, double paramCostPerDrink);
 void CalculatePackaging(int paramNumDrinks, int paramNumDrinksPerTray, int &paramNumTrays, int &paramNumExtraDrinks);
 
 
+// Global variables
+const int NUM_DRINKS_PER_TRAY = 4;
+const double COST_PER_DRINK = 0.85;
+
 // Main function
 int main(){
     int userNumDrinks = 0.0;
-    const int NUM_DRINKS_PER_TRAY = 4;
     int numTrays = 0;
     int numExtraDrinks = 0;
-    double costPerDrink = 0.85;
     double totalCost = 0.0;
 
     // Get user input for total number of drinks
     cin >> userNumDrinks;
 
     // Calculate total cost and packaging and assign those values to variables
-    totalCost = CalculateDrinkCost(userNumDrinks, costPerDrink);
+    totalCost = CalculateDrinkCost(userNumDrinks, COST_PER_DRINK);
     CalculatePackaging(userNumDrinks, NUM_DRINKS_PER_TRAY, numTrays, numExtraDrinks);
 
     // Output calculations with formatting
