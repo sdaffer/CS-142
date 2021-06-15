@@ -78,12 +78,9 @@ void AddDocument(vector<Document*> &paramDocList) {
     string docContent = "";
 
     // Prompt for user input
-    cout << "Enter the document name: " << endl;
-    cin >> docName;
-    cout << "Enter the document extension: " << endl;
-    cin >> docExtension;
-    cout << "Enter the document content: " << endl;
-    cin >> docContent;
+    docName = GetUserString("Enter the document name: ");
+    docExtension = GetUserString("Enter the document extension: ");
+    docContent = GetUserString("Enter the document content: ");
 
     // Create newDocument object and allocate memory
     Document* newDocument = new Document(docName, docExtension, docContent);
@@ -94,24 +91,29 @@ void AddDocument(vector<Document*> &paramDocList) {
 
 void RenameDocument(vector<Document*> &paramDocList) {
     // Declare and initialize variables
-    int userInt = -1; // Init w/ -1 because -1 is out of index
+    int userInt = 0;
     string docName = "";
 
     // Prompt for user input
-    cout << "Enter the index of your document you want to rename: " << endl;
-    cin >> userInt;
-    cout << "Enter the new name of the document: " << endl;
-    cin >> docName;
+    userInt = GetUserInt("Enter the index of your document you want to rename: ");
+    docName = GetUserString("Enter the new name of the document: ");
 
     // Rename the document on the passed vector
     paramDocList.at(userInt)->Rename(docName);
 }
 
-void ShareDocument() {
+void ShareDocument(vector<Document*> paramDocList, vector<Document*> &paramSharedDocList) {
+    // Declare and initialize variables
+    int userInt = 0;
 
+    // Prompt for user input
+    userInt = GetUserInt("Enter the index of your document you want to share: ");
+
+    // Point the shared document list to the document at the specified index on the user's list
+    paramSharedDocList.push_back(paramDocList.at(userInt)); // Notice that we haven't created a new object
 }
 
-void DisplayAllDocuments(vector<Document*> paramDocList) {
+void DisplayAllDocuments(vector<Document*> paramDocList, vector<Document*> paramSharedDocList) {
 
     cout << "-------------------Your List------------------" << endl;
 
@@ -124,6 +126,11 @@ void DisplayAllDocuments(vector<Document*> paramDocList) {
     cout << "--------------Your Friend's List--------------" << endl;
 
     // Loop through each position on the vector of user's shared documents and output its properties
+    for (int i = 0; i < paramSharedDocList.size(); ++i) {
+        cout << "Name: " << paramSharedDocList.at(i)->GetName()  << ".";
+        cout << paramSharedDocList.at(i)->GetExtension() << endl;
+        cout << "Contents: " << paramSharedDocList.at(i)->GetContents();
+    }
 
     cout << "----------------------------------------------" << endl;
 }
@@ -149,22 +156,26 @@ int main() {
     while(option != QUIT_OPTION){
 
         if(option == ADD_DOCUMENT_OPTION){
-
+            AddDocument(userDocumentList);
         }
         else if(option == RENAME_DOCUMENT_OPTION){
-
+            RenameDocument(userDocumentList);
         }
         else if(option == SHARE_YOUR_DOCUMENT_OPTION){
-
+            ShareDocument(userDocumentList, sharedDocumentList);
         }
         else if(option == DISPLAY_ALL_DOCUMENTS_OPTION){
-
+            DisplayAllDocuments(userDocumentList, sharedDocumentList);
         }
 
         option = GetUserInt("Enter option: \n");
     }
 
     // Free up allocated memory
+    for (int i = 0; i < userDocumentList.size(); ++i) {
+        delete userDocumentList.at(i); // Each position in the document list has a document with memory allocated
+        // but the shared list only points to these documents
+    }
 
     return 0;
 }
