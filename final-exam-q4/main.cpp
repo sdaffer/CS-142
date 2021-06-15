@@ -71,9 +71,71 @@ int GetUserInt(const std::string& prompt = "") {
     return userAnswer;
 }
 
+void AddDocument(vector<Document*> &paramDocList) {
+    // Declare and initialize variables
+    string docName = "";
+    string docExtension = "";
+    string docContent = "";
+
+    // Prompt for user input
+    cout << "Enter the document name: " << endl;
+    cin >> docName;
+    cout << "Enter the document extension: " << endl;
+    cin >> docExtension;
+    cout << "Enter the document content: " << endl;
+    cin >> docContent;
+
+    // Create newDocument object and allocate memory
+    Document* newDocument = new Document(docName, docExtension, docContent);
+
+    // Add to the passed vector parameter
+    paramDocList.push_back(newDocument);
+}
+
+void RenameDocument(vector<Document*> &paramDocList) {
+    // Declare and initialize variables
+    int userInt = -1; // Init w/ -1 because -1 is out of index
+    string docName = "";
+
+    // Prompt for user input
+    cout << "Enter the index of your document you want to rename: " << endl;
+    cin >> userInt;
+    cout << "Enter the new name of the document: " << endl;
+    cin >> docName;
+
+    // Rename the document on the passed vector
+    paramDocList.at(userInt)->Rename(docName);
+}
+
+void ShareDocument() {
+
+}
+
+void DisplayAllDocuments(vector<Document*> paramDocList) {
+
+    cout << "-------------------Your List------------------" << endl;
+
+    // Loop through each position on the vector of user's documents and output its properties
+    for (int i = 0; i < paramDocList.size(); ++i) {
+        cout << "Name: " << paramDocList.at(i)->GetName()  << "." << paramDocList.at(i)->GetExtension() << endl;
+        cout << "Contents: " << paramDocList.at(i)->GetContents();
+    }
+
+    cout << "--------------Your Friend's List--------------" << endl;
+
+    // Loop through each position on the vector of user's shared documents and output its properties
+
+    cout << "----------------------------------------------" << endl;
+}
+
 // Modify the main function to handle each menu option
 // Consider creating a new function (above main) per menu option
-int main(){
+int main() {
+
+    // Declare a vector of document type w/ pointer
+    vector<Document*> userDocumentList(0);
+    vector<Document*> sharedDocumentList(0);
+
     const int ADD_DOCUMENT_OPTION = 1;
     const int RENAME_DOCUMENT_OPTION = 2;
     const int SHARE_YOUR_DOCUMENT_OPTION = 3;
@@ -101,5 +163,8 @@ int main(){
 
         option = GetUserInt("Enter option: \n");
     }
+
+    // Free up allocated memory
+
     return 0;
 }
