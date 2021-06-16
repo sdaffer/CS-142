@@ -25,7 +25,7 @@ void Person::SetAge(int newAge){
 }
 
 bool Person::LessThan(Person compareTo){
-    if(compareTo.age > age){
+    if(compareTo.age < age){
         return true;
     }
     else{

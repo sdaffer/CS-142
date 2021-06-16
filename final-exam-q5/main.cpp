@@ -1,4 +1,3 @@
-#include "Person.h"
 #include "PeopleList.h"
 #include <iostream>
 #include <string>
@@ -14,7 +13,7 @@ int main(){
     cout << "Congratulations! Your program has compiled!\n" << endl;//this line earns you points...
 
     cout << "How many people would you like to add to the list to be sorted?:\n";
-    cin >> personAge;
+    cin >> numberOfPeople;
 
     for(int i = 0; i < numberOfPeople; i++){
         cout << "Enter person " << i + 1 << "'s first name:\n";
