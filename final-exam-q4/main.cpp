@@ -118,7 +118,7 @@ void DisplayAllDocuments(vector<Document*> paramDocList, vector<Document*> param
     cout << "-------------------Your List------------------" << endl;
 
     // Loop through each position on the vector of user's documents and output its properties
-    for (int i = 0; i < paramDocList.size(); ++i) {
+    for (unsigned int i = 0; i < paramDocList.size(); ++i) {
         cout << "Name: " << paramDocList.at(i)->GetName()  << "." << paramDocList.at(i)->GetExtension() << endl;
         cout << "Contents: " << paramDocList.at(i)->GetContents();
     }
@@ -126,7 +126,7 @@ void DisplayAllDocuments(vector<Document*> paramDocList, vector<Document*> param
     cout << "--------------Your Friend's List--------------" << endl;
 
     // Loop through each position on the vector of user's shared documents and output its properties
-    for (int i = 0; i < paramSharedDocList.size(); ++i) {
+    for (unsigned int i = 0; i < paramSharedDocList.size(); ++i) {
         cout << "Name: " << paramSharedDocList.at(i)->GetName()  << ".";
         cout << paramSharedDocList.at(i)->GetExtension() << endl;
         cout << "Contents: " << paramSharedDocList.at(i)->GetContents();
@@ -172,7 +172,7 @@ int main() {
     }
 
     // Free up allocated memory
-    for (int i = 0; i < userDocumentList.size(); ++i) {
+    for (unsigned int i = 0; i < userDocumentList.size(); ++i) {
         delete userDocumentList.at(i); // Each position in the document list has a document with memory allocated
         // but the shared list only points to these documents
     }
